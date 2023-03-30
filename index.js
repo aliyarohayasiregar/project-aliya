@@ -8,13 +8,18 @@ import bcrypt from "bcryptjs";
 
 
 const app = express();
+// import multer from "multer";
+// const upload = multer({ dest: "public/photos" });
+
+
+
 
 // MIDDLEWARE
 
 // Untuk mengelola cookie
 app.use(cookieParser());
 
-// Untuk memeriksa otorisasi
+//Untuk memeriksa otorisasi
 app.use((req, res, next) => {
   if (req.path.startsWith("/api/login") || req.path.startsWith("/assets")) {
     next();
@@ -52,12 +57,12 @@ app.use((req, res, next) => {
 
 
 // Untuk mengakses file statis
-// app.use(express.static("public"));
+app.use(express.static("public"));
 
 // Untuk mengakses file statis (khusus Vercel)
-import path from "path";
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-app.use(express.static(path.resolve(__dirname, "public")));
+// import path from "path";
+// const __dirname = path.dirname(new URL(import.meta.url).pathname);
+// app.use(express.static(path.resolve(__dirname, "public")));
 
 // Untuk membaca body berformat JSON
 app.use(express.json());
@@ -65,16 +70,9 @@ app.use(express.json());
 // ROUTE OTORISASI
 
 
-// Dapatkan mahasiswa saat ini (yang sedang login)
-app.get("/api/me", (req, res) => {
-  const me = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
-  res.json(me);
-});
-
-// Login (dapatkan token)
-app.post("/api/login",async( req, res)=> {
+app.post("/api/login", async (req, res) => {
   const results = await client.query(
-    `SELECT * FROM login`
+    `SELECT * FROM login where username='${req.body.username}'`
   );
   if (results.rows.length > 0) {
     if (await bcrypt.compare(req.body.password, results.rows[0].password)) {
@@ -92,6 +90,14 @@ app.post("/api/login",async( req, res)=> {
 });
 
 
+// Dapatkan mahasiswa saat ini (yang sedang login)
+app.get("/api/me", (req, res) => {
+  const me = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
+  res.json(me);
+});
+
+// Login (dapatkan token)
+
 // Logout (hapus token)
 app.get("/api/logout", (_req, res) => {
   res.setHeader("Cache-Control", "no-store"); // khusus Vercel
@@ -102,8 +108,8 @@ app.get("/api/logout", (_req, res) => {
 // ROUTE MAHASISWA
 
 // Dapatkan semua
-app.get("/api/mahasiswa", async (_req, res) => {
-  const results = await client.query("SELECT * FROM mahasiswa ORDER BY id");
+app.get("/api/detail", async (_req, res) => {
+  const results = await client.query("SELECT * FROM detail_barang");
   res.json(results.rows);
 });
 
@@ -114,7 +120,6 @@ app.get("/api/mahasiswa/:id", async (req, res) => {
   );
   res.json(results.rows[0]);
 });
-
 const salt = await bcrypt.genSalt(10);
 const hash = await bcrypt.hash("000", salt);
 console.log(hash);
@@ -125,7 +130,7 @@ app.post("/api/daftar", async (req, res) => {
   const salt = await bcrypt.genSalt();
   const hash = await bcrypt.hash(req.body.password, salt);
   await client.query(
-    `INSERT INTO login VALUES ('${req.body.user}', '${hash}')`
+    `INSERT INTO login(username,password) VALUES ('${req.body.username}','${hash}')`
   );
   res.send("Mahasiswa berhasil daftar.");
 });
@@ -158,6 +163,39 @@ app.post("/api/keluar", (req, res) => {
   res.redirect("/login");
 });
 // MEMULAI SERVER
+
+
+
+//ROUTE BARANG
+//tampil semua
+app.get("/api/barang", async (_req, res) => {
+  const results = await client.query("SELECT * FROM barang");
+  res.json(results.rows);
+});
+
+// Tambah
+app.post("/api/barang", async (req, res) => {
+  await client.query(
+    `INSERT INTO barang (nama_barang, harga_barang, descripsite) VALUES ('${req.body.nama_barang}','${req.body.harga_barang}','${req.body.descripsite}')`
+  );
+  res.send("barang berhasil di tambah.");
+});
+
+// Edit
+app.put("/api/barang/:id", async (req, res) => {
+  await client.query(
+    `UPDATE barang SET nama_barang = '${req.body.nama_barang}', harga_barang = '${req.body.harga_barang}',descripsite='${req.body.descripsite}' WHERE id = ${req.params.id}`
+  );
+  res.send("barang berhasil diedit.");
+});
+
+// Hapus
+app.delete("/api/barang/:id", async (req, res) => {
+  await client.query(`
+  DELETE FROM barang WHERE id = ${req.params.id}`);
+  res.send("barang berhasil dihapus.");
+});
+
 
 app.listen(3000, () => {
   console.log("Server berhasil berjalan.");

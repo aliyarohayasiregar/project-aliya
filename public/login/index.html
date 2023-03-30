@@ -3,29 +3,28 @@
 <head>
 <meta charset="utf-8">
 <title></title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../assets/style.css">
 </head>
 <body>
 <div class="login-box">
 <h1>Login</h1>
 <div class="textbox">
 <i class="fas fa-user"></i>
-<input type="text" placeholder="Username">
+<form action="" name="login">
+  <input type="text" placeholder="Username" name="username">
 </div>
 <div class="textbox">
 <i class="fas fa-lock"></i>
-<input type="password" placeholder="Password">
+<input type="password" placeholder="Password" name="password">
 </div>
-<input type="button" class="btn" value="Sign in">
+<button>login</button>
 </div>
-
-
-
+</form>
 </html>
     <script>
       document.login.onsubmit = (e) => {
         e.preventDefault();
-        const user = document.login.user.value;
+        const username = document.login.username.value;
         const password = document.login.password.value;
         fetch("/api/login", {
           method: "POST",
@@ -33,7 +32,7 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user,
+            username,
             password,
           }),
         }).then(async (response) => {
