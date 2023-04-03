@@ -26,7 +26,7 @@
         e.preventDefault();
         const username = document.login.username.value;
         const password = document.login.password.value;
-        fetch("/api/login", {
+        fetch("/api/login/admin", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@
           }),
         }).then(async (response) => {
           if (response.ok) {
-            location.href = "/";
+            location.href = "/hal-admin";
           } else {
             const message = await response.text();
             alert(message);

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css">
+    <title>Edit Mahasiswa</title>
+    <link rel="stylesheet" href="../../assets/style.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="wrapper">
+          <div class="logo"><a href="">AlPotek.com</a></div>
+          <div class="menu">
+              <ul >
+                  <li><a class="tbl-biru" href="http://localhost:3000/hal-admin/">Kembali</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+  <section>
+    <div class="container-edit">
+      <div class="body-edit">
+        <form name="edit" class="edit">
+          <h1>Edit Obat</h1>
+          <input type="text" name="nama_barang" placeholder="Nama Barang" required autofocus />
+          <input type="text" name="harga_barang" placeholder="Harga Barang" required />
+          <input type="radio" name="id_kategori" value="1" disabled> Baju<br>
+          <input type="radio" name="id_kategori" value="2"> Handpone<br>
+          <input type="radio" name="id_kategori" value="3"> Acsecoris<br> 
+          <input type="radio" name="id_kategori" value="4"> Celana<br> 
+          <input type="radio" name="id_kategori" value="5"> Sepatu<br> 
+          <input type="text" name="descripsite" placeholder="Descripsi" required /> 
+          <input type="text" name="stok" placeholder="Stok Barang" required /> 
+          <br>
+          <label>
+            Foto
+          </label>
+          <input type="file" name="photo" />
+        <button>Simpan</button>
+        </form>  
+        <!-- <div class="right"><img src="../../assets/" alt=""></div> -->
+      </div>  
+    </div>
+
+  </section>
+    <script>
+      const searchParams = new URLSearchParams(location.search);
+
+      fetch(`/api/barang/${searchParams.get("id")}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          document.edit.nama_barang.value = data.nama_barang;
+          document.edit.harga_barang.value = data.harga_barang;
+          document.edit.id_kategori=data.id_kategori;
+          document.edit.descripsite=data.descripsite;
+          document.edit.stok=data.stok;
+          document.edit.photo=File.foto;
+
+        });
+        
+      document.edit.onsubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        data.append("nama_barang", document.edit.nama_barang.value);
+        data.append("harga_barang", document.edit.harga_barang.value);
+        data.append("id_kategori", document.edit.id_kategori.value);
+        data.append("descripsite", document.edit.descripsite.value);
+        data.append("stok", document.edit.stok.value);
+        data.append("foto", document.edit.photo.files[0]);
+
+
+        fetch(`/api/barang/${searchParams.get("id")}`, {
+          method: "PUT",
+    
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body:
+            data,
+          }), 
+        alert("Data Berhasil Di edit.");
+        // location.href="/dashboard/edits";
+      };
+    </script>
+    
+  </body>
+  <footer class="footer">
+    <div class="footer-container">
+        <div>
+            <ul class="social-icons">
+                <a href="https://twitter.com/login">
+                    <li class="flex"><i class="fa fa-twitter fa-2x"></i></li>
+                </a>
+                <a href="https://www.facebook.com/alya.siregar.754">
+                    <li class="flex"><i class="fa fa-facebook fa-2x"></i></li>
+                </a>
+                <a href="https://www.instagram.com/alya_siregar123/?hl=id">
+                    <li class="flex"><i class="fa fa-instagram fa-2x"></i></li>
+                </a>
+
+            </ul>
+        </div>
+        <div class="footer-text">
+            <div>
+                <h2>Useful</h2>
+                <a href="#">Blog</a>
+                <a href="#">Shopping</a>
+                <a href="#">Subscription</a>
+                <a href="#">Gift Card</a>
+            </div>
+            <div>
+                <h2>Community</h2>
+                <a href="#">Community Central</a>
+                <a href="#">Support</a>
+                <a href="#">Help</a>
+                <a href="#">Do Not Sell My info</a>
+            </div>  
+            <div>
+                <h2>Company</h2>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">FTC Disclosure</a>
+                <a href="#">Sitemap</a>
+            </div>
+            <div>
+                <h2>Privacy</h2>
+                <a href="#">Career</a>
+                <a href="#">Abou Us</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Service</a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+</html>

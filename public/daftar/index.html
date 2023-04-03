@@ -1,0 +1,94 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Form</title>
+    <link rel="stylesheet" href="../assets/style3.css">
+</head>
+<body>
+    <form name="insert">
+        <fieldset>
+            <legend style="text-align: center;"> <b>Form Registrasi</b> </legend>
+
+            <label for="input_username">Username</label>
+            <input name="username" type="text" id="input_username"
+            placeholder="Masukan Username"
+            class="input_user"> 
+
+            <label for="input_name">Nama</label>
+            <input name="nama" type="text" id="input_name"
+            placeholder="Masukan Nama"
+            class="input_user">
+
+            <label for="input_address" id="label_address">Alamat</label>
+            <input type="text" name="alamat" id="input_address" class="input_user"
+            placeholder="Masukan Alamat"/>
+
+
+            <label for="input_password">No Handpone</label>
+            <input name="no_telepon" type="text"
+            placeholder="Masukan No Handpone"
+            class="input_user">
+
+
+            
+            <label for="input_email">Ulang Username</label>
+            <input name="user"
+            placeholder="Masukan Email"
+            class="input_user">            
+            
+            <label  for="input_password">Password</label>
+            <input name="password" type="password" id="input_password"
+            placeholder="Masukan Password"
+            class="input_user">
+
+            
+
+
+            <div>
+                <input type="reset" value="Ulang" class="button" id="reset_button">
+                <button id="submit_button" class="button">Simpan</button>
+            </div>
+            
+        </fieldset>
+    </form>
+    <script>
+        document.insert.onsubmit = async (e) => {
+          e.preventDefault();
+          const username=document.insert.username.value;
+          const nama=document.insert.nama.value;
+          const alamat=document.insert.alamat.value;
+          const no_telepon=document.insert.no_telepon.value;
+          const user=document.insert.user.value;
+          const password=document.insert.password.value;
+
+        //   const data = new FormData();
+        //   data.append("username", document.insert.username.value);
+        //   data.append("nama", document.insert.nama.value);
+        //   data.append("alamat", document.insert.alamat.value);
+        //   data.append("no_telepon", document.insert.no_telepon.value);
+        //   data.append("username", document.insert.username.value);
+        //   data.append("password", document.insert.password.value);
+  
+  
+          await fetch("/api/daftar",{
+            method: "POST",
+            headers:{
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            nama,
+            alamat,
+            no_telepon,
+            user,
+            password,
+          
+          }),
+          });
+          alert("Akun anda sudah terdaftar");
+          location.href="/hal-utama";
+        };
+      </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+    <!-- font awsome CDN file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <!-- custom CSS file link -->
+    <link rel="stylesheet" href="../assets/styles2.css">
+</head>
+<body>
+    <!-- <img src="./pexels-tim-douglas-6567607.jpg" alt=""> -->
+<!-- Header section start -->
+<header class="header">
+    <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Gstore</a>
+    <nav class="navbar">
+
+              <a href="#home">Home</a>  
+              <a href="../login-admin/index.html">Admin</a>  
+        
+    </nav>
+
+    <div class="icons">
+      <div class="fas fa-bars" id="menu-btn"></div>
+      <!-- <div class="fas fa-search" id="search-btn"></div>
+      <div class="fas fa-shopping-cart" id="cart-btn"></div> -->
+      <div class="fas fa-user" id="login-btn"></div>
+  </div>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+
+
+
+    <form action="" class="login-form" name="login">
+        <h3>login now</h3>
+        <input name="username" placeholder="Username" class="box">
+        <input name="password" type="password" placeholder="Password" class="box">
+        <p>Daftar akun baru?<a href="../daftar/index.html">Buat Sekarang</a></p>
+        <!-- <input type="submit" value="login now" class="btn"> -->
+        <button class="btn">Login</button>
+    </form>
+    <script>
+        document.login.onsubmit = (e) => {
+          e.preventDefault();
+          const username = document.login.username.value;
+          const password = document.login.password.value;
+          fetch("/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username,
+              password,
+            }),
+          }).then(async (response) => {
+            if (response.ok) {
+              location.href = "../dashboard/tambah";
+            } else {
+              const message = await response.text();
+              alert(message);
+            }
+          });
+        };
+  
+      </script>
+  
+
+
+
+
+</header>
+
+<!-- Header section end -->
+    
+
+
+
+<!-- custom JS file link -->
+    <script src="scripts.js"></script>
+</body>
+</html>
