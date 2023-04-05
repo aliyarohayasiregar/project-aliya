@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="../../../assets/style6.css">
+</head>
+<body>
+<header class="header">
+    <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Gstore</a>
+    <nav class="navbar">
+
+              <a href="../../../hal-user/index.html">Home</a>  
+              <a href="../pakaian/index.html">Pakaian</a>  
+              <a href="./index.html">Handpone</a>  
+              <a href="../acsecoris/">Acsesoris</a>  
+              <a href="../celana/">Celana</a>  
+              <a href="../sepatu/">Sepatu</a>  
+        
+    </nav>
+
+    <div class="icons">
+      <div class="fas fa-bars" id="menu-btn"></div>
+  </div>
+
+</header>
+
+<main>
+  <div id="container">
+    <div id="barang"></div>
+  </div>
+</main>
+
+
+
+    <script src="../../script.js"></script>
+</body>
+</html>
+  <script>
+    const tampungan = document.querySelector("#barang");
+
+    fetch("/api/kategori2", {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (products) {
+        for (let tamp = 0; tamp < products.length; tamp++) {
+          const barang = document.createElement("div");
+          barang.className = "container";
+
+          const gambar = document.createElement("img");
+          gambar.className = "img-produk";
+          gambar.src = `/photos/${products[tamp].foto}`;
+          barang.appendChild(gambar);
+          tampungan.appendChild(barang);
+
+          const judul = document.createElement("h4");
+          judul.className = "judul-produk";
+          judul.textContent = products[tamp].nama_barang;
+          barang.appendChild(judul);
+          tampungan.appendChild(barang);
+
+          const harga = document.createElement("h3");
+          harga.className = "price";
+          harga.textContent = "Harga= " + "Rp." + products[tamp].harga_barang;
+          barang.appendChild(harga);
+          tampungan.appendChild(barang);
+
+          const tombol = document.createElement("button");
+          tombol.type = "submit";
+          tombol.classList = "pencet";
+          const shop = document.createElement("i");
+          shop.className = "fa fa-shopping-cart";
+          shop.id = "addToChart" + products[tamp].id;
+          shop.onclick = function () {
+            storeToChart(tamp.id);
+          };
+
+          tombol.appendChild(shop);
+          barang.appendChild(tombol);
+          tampungan.appendChild(barang);
+        }
+      });
+
+    function storeToChart(id) {
+      alert("Berhasil Ditambahkan Ke keranjang!!");
+    }
+  </script>
+</html>

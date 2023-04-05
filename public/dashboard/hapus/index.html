@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Data Mahasiswa</title>
     <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="../../assets/style4.css" />
   </head>
   <body>
     <nav>
@@ -23,10 +23,11 @@
       <table border="2">
         <thead>
           <tr>
-            <th>Nama Obat</th>
-            <th>Harga Obat</th>
-            <th>Kode obat</th>
-            <th>stok obat</th>
+            <th>Nama Barang</th>
+            <th>Id Kategori</th>
+            <th>Harga Barang</th>
+            <th>descripsi</th>
+            <th>stok</th>
             <th>foto</th>
             <th>Action</th>
           </tr>
@@ -50,15 +51,21 @@
           for (let i = 0; i < data.length; i++) {
             const tr = document.createElement("tr");
 
-            const tdNim = document.createElement("td");
-            tdNim.textContent = data[i].nama_barang;
-            tr.appendChild(tdNim);
+            const tdNama = document.createElement("td");
+            tdNama.textContent = data[i].nama_barang;
+            tr.appendChild(tdNama);
 
-            const tdName = document.createElement("td");
-            tdName.textContent = "Rp."+data[i].harga_barang;
-            tr.appendChild(tdName);
+            const id=document.createElement("td");
+            id.textContent=data[i].id_kategori;
+            tr.appendChild(id);
 
-          
+            const tdHarga = document.createElement("td");
+            tdHarga.textContent = "Rp."+data[i].harga_barang;
+            tr.appendChild(tdHarga);
+
+            const des=document.createElement("td");
+            des.textContent=data[i].descripsite;
+            tr.appendChild(des);
 
             const stok= document.createElement("td");
             stok.textContent = data[i].stok;
@@ -80,7 +87,7 @@
             buttonDelete.onclick = () => {
               if (
                 confirm(
-                  `Apakah Anda yakin ingin menghapus ${data[i].nama_obat}?`
+                  `Apakah Anda yakin ingin menghapus ${data[i].nama_barang}?`
                 )
               ) {
                 fetch(`/api/barang/${data[i].id}`, {

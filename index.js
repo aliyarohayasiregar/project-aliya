@@ -11,8 +11,6 @@ const app = express();
 import multer from "multer";
 
 
-
-
 // MIDDLEWARE
 
 // Untuk mengelola cookie
@@ -20,7 +18,7 @@ app.use(cookieParser());
 
 //Untuk memeriksa otorisasi
 app.use((req, res, next) => {
-  if (req.path.startsWith("/api/login") || req.path.startsWith("/assets")||req.path.startsWith("/")||req.path.startsWith("/api/daftar")) {
+  if (req.path.startsWith("/api/login") || req.path.startsWith("/assets")||req.path.startsWith("/hal-utama")||req.path.startsWith("/daftar")||req.path.startsWith("/api/daftar")||req.path.startsWith("/login-admin")) {
     next();
   } else {
     let authorized = false;
@@ -34,23 +32,24 @@ app.use((req, res, next) => {
       }
     }
     if (authorized) {
-      if (req.path.startsWith("/")) {
+      if (req.path.startsWith("/hal-utama")) {
         res.redirect("/");
       } else {
         next();
       }
     } else {
-      if (req.path.startsWith("/")) {
+      if (req.path.startsWith("/hal-utama")) {
         next();
       } else {
         if (req.path.startsWith("/api")) {
           res.status(401);
           res.send("Anda harus login terlebih dahulu.");
         } else {
-          res.redirect("/");
+          res.redirect("/hal-utama");
         }
       }
     }
+
   }
 });
 
@@ -90,7 +89,7 @@ app.post("/api/login", async (req, res) => {
 });
 
 
-// Dapatkan mahasiswa saat ini (yang sedang login)
+// Dapatkan pengguna saat ini (yang sedang login)
 app.get("/api/me", (req, res) => {
   const me = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
   res.json(me);
@@ -152,19 +151,6 @@ app.post("/api/login/admin", async (req, res) => {
   }
 });
 
-// Edit
-app.put("/api/mahasiswa/:id", async (req, res) => {
-  await client.query(
-    `UPDATE mahasiswa SET nim = '${req.body.nim}', nama = '${req.body.nama}' WHERE id = ${req.params.id}`
-  );
-  res.send("Mahasiswa berhasil diedit.");
-});
-
-// Hapus
-app.delete("/api/mahasiswa/:id", async (req, res) => {
-  await client.query(`DELETE FROM mahasiswa WHERE id = ${req.params.id}`);
-  res.send("Mahasiswa berhasil dihapus.");
-});
 
 // //tambah admin
 // app.post("/api/admin", async (req, res) => {
@@ -179,13 +165,11 @@ app.delete("/api/mahasiswa/:id", async (req, res) => {
 
 // ROUTE PELATIHAN
 
-// Dapatkan semua
-app.get("/api/pelatihan", async (_req, res) => {
-  const results = await client.query("SELECT * FROM pelatihan");
+// Dapatkan semua pengguna
+app.get("/api/user", async (_req, res) => {
+  const results = await client.query("SELECT * FROM daftar");
   res.json(results.rows);
 });
-
-
 
 
 
@@ -193,6 +177,45 @@ app.post("/api/keluar", (req, res) => {
   res.clearCookie(`${req.body.token}`);
   res.redirect("/login");
 });
+
+//tampil barang kategori
+app.get("/api/kategori1",async(_req,res)=>{
+  const results = await client.query(
+    `SELECT *FROM barang WHERE id_kategori = 1`
+  );
+  res.json(results.rows);
+});
+
+app.get("/api/kategori2",async(_req,res)=>{
+  const results = await client.query(
+    `SELECT *FROM barang WHERE id_kategori = 2`
+  );
+  res.json(results.rows);
+
+})
+app.get("/api/kategori3",async(_req,res)=>{
+  const results = await client.query(
+    `SELECT *FROM barang WHERE id_kategori = 3`
+  );
+  res.json(results.rows);
+
+})
+app.get("/api/kategori4",async(_req,res)=>{
+  const results = await client.query(
+    `SELECT *FROM barang WHERE id_kategori = 4`
+  );
+  res.json(results.rows);
+
+})
+
+app.get("/api/kategori5",async(_req,res)=>{
+  const results = await client.query(
+    `SELECT *FROM barang WHERE id_kategori = 5`
+  );
+  res.json(results.rows);
+
+})
+
 
 
 
@@ -205,7 +228,7 @@ app.get("/api/barang", async (_req, res) => {
 });
 
 
-// Tambah
+// Tambah barang
 app.post("/api/barang", upload.single("foto"),async (req, res) => {
   await client.query(
     `INSERT INTO barang (nama_barang,harga_barang,id_kategori,descripsite,stok,foto) VALUES ('${req.body.nama_barang}',${req.body.harga_barang},'${req.body.id_kategori}','${req.body.descripsite}',${req.body.stok},'${req.file.filename}')`
@@ -213,8 +236,7 @@ app.post("/api/barang", upload.single("foto"),async (req, res) => {
   res.send("barang berhasil di tambah.");
 });
 
-// Edit
-
+// Edit barang
 app.put("/api/barang/:id",upload.single("foto"), async (req, res) => {
   console.log(req.body);
   console.log(req.params.id);

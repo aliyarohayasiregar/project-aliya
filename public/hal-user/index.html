@@ -1,92 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Document</title>
-    <script
-      src="https://kit.fontawesome.com/dbed6b6114.js"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="../css/projec.css" />
-  </head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Store</title>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="../assets/style6.css">
+</head>
+<body>
+<header class="header">
+    <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Gstore</a>
+    <nav class="navbar">
 
-  <body>
-    <div>
-      <nav>
-        <div class="wrapper">
-          <div class="logo"><a href="">AlPotek.com</a></div>
-          <div class="menu">
-            <ul>
-              <li>
-                <a class="tbl-biru" href="../halaman-utama/index.html"
-                  >keluar</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+              <a href="./index.html">Home</a>  
+              <a href="./kategori/pakaian/">Pakaian</a>  
+              <a href="./kategori/handpone/">Handpone</a>  
+              <a href="./kategori/acsecoris/">Acsesoris</a>  
+              <a href="./kategori/celana/">Celana</a>  
+              <a href="./kategori/sepatu/">Sepatu</a>  
+        
+    </nav>
 
-      <main>
-        <div id="container">
-          <div id="barang"></div>
-          <!-- <script src="../java_script/halaman2.js"></script> -->
-        </div>
-      </main>
-    </div>
-  </body>
+    <div class="icons">
+      <div class="fas fa-bars" id="menu-btn"></div>
+  </div>
 
-  <footer class="footer">
-    <div class="footer-container">
-      <div>
-        <ul class="social-icons">
-          <a href="https://twitter.com/login">
-            <li class="flex"><i class="fa fa-twitter fa-2x"></i></li>
-          </a>
-          <a href="https://www.facebook.com/alya.siregar.754">
-            <li class="flex"><i class="fa fa-facebook fa-2x"></i></li>
-          </a>
-          <a href="https://www.instagram.com/alya_siregar123/?hl=id">
-            <li class="flex"><i class="fa fa-instagram fa-2x"></i></li>
-          </a>
-        </ul>
-      </div>
-      <div class="footer-text">
-        <div>
-          <h2>Useful</h2>
-          <a href="#">Blog</a>
-          <a href="#">Shopping</a>
-          <a href="#">Subscription</a>
-          <a href="#">Gift Card</a>
-        </div>
-        <div>
-          <h2>Community</h2>
-          <a href="#">Community Central</a>
-          <a href="#">Support</a>
-          <a href="#">Help</a>
-          <a href="#">Do Not Sell My info</a>
-        </div>
-        <div>
-          <h2>Company</h2>
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-          <a href="#">FTC Disclosure</a>
-          <a href="#">Sitemap</a>
-        </div>
-        <div>
-          <h2>Privacy</h2>
-          <a href="#">Career</a>
-          <a href="#">Abou Us</a>
-          <a href="#">Contact Us</a>
-          <a href="#">Service</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+</header>
 
+<main>
+  <div id="container">
+    <div id="barang"></div>
+  </div>
+</main>
+
+
+
+    <script src="./script.js"></script>
+</body>
+</html>
   <script>
     const tampungan = document.querySelector("#barang");
 
