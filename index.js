@@ -149,7 +149,7 @@ app.get("/api/user", async (_req, res) => {
 });
 
 
-
+//keluar
 app.post("/api/keluar", (req, res) => {
   res.clearCookie(`${req.body.token}`);
   res.redirect("/login");
@@ -215,8 +215,6 @@ app.post("/api/barang", upload.single("foto"),async (req, res) => {
 
 // Edit barang
 app.put("/api/barang/:id",upload.single("foto"), async (req, res) => {
-  console.log(req.body);
-  console.log(req.params.id);
   await client.query(
     `UPDATE barang SET nama_barang = '${req.body.nama_barang}', harga_barang = ${req.body.harga_barang},id_kategori=${req.body.id_kategori},descripsite='${req.body.descripsite}',stok=${req.body.stok},foto='${req.file.filename}' WHERE id=${req.params.id}`
   );
