@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../../assets/style.css">
-    <title>Tambah Obat</title>
+    <title>Tambah barang</title>
     <!-- <link rel="stylesheet" href="/style.css" /> -->
   </head>
   <body>
     <nav>
         <div class="wrapper">
-            <div class="logo"><a href="">AlPotek.com</a></div>
+            <div class="logo"><a href="">Tambah Barang</a></div>
             <div class="menu">
                 <ul >
                     <li><a class="tbl-biru" href="http://localhost:3000/hal-admin/">Kembali</a></li>
@@ -24,7 +24,7 @@
       <div class="container-insert">
         <div class="body-insert">
           <form class="insert" name="insert">
-            <h1>Tambah Obat</h1>
+            <h1>Tambah Barang</h1>
             <hr>
             <input type="text" name="nama_barang" placeholder="Nama Barang" required autofocus />
             <input type="text" name="harga_barang" placeholder="Harga Barang" required />
@@ -42,7 +42,6 @@
             <input type="file" name="photo" />
             <button>Simpan</button>
           </form>
-          <div class="right"><img src="../gg.png" alt=""></div>
         </div>
     
       </div>
@@ -69,7 +68,7 @@
           body: data,
         });
         alert("Data Berhasil Ditambahkan.");
-        location.href="/dashboard/edits";
+        location.href="/dashboard/details";
       };
     </script>
   </body>

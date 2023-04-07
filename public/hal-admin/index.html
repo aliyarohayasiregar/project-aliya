@@ -15,16 +15,30 @@
     <div class="sidebar">
     <header>My App</header>
   <ul>
-    <li><a href="../dashboard/tambah/index.html"><i class="fas fa-qrcode"></i>Tambah Barang</a></li>
-    <li><a href="../dashboard/edits/index.html"><i class="fas fa-link"></i>Edit Barang</a></li>
+    <li><a href="../dashboard/tambah/"><i class="fas fa-qrcode"></i>Tambah Barang</a></li>
+    <li><a href="../dashboard/edits/"><i class="fas fa-link"></i>Edit Barang</a></li>
     <li><a href="../dashboard/hapus/"><i class="fas fa-stream"></i>Hapus Barang</a></li>
-    <li><a href="#"><i class="fas fa-calendar-week"></i>Detail barang</a></li>
-    <li><a href="#"><i class="far fa-question-circle"></i>Lihat Pengguna</a></li>
-    <li><a href="#"><i class="fas fa-sliders-h"></i>Tentang Admin</a></li>
-    <li><a href="#"><i class="far fa-envelope"></i>Contact</a></li>
+    <li><a href="../dashboard/details/"><i class="fas fa-calendar-week"></i>Detail barang</a></li>
+    <li><a href="../dashboard/user/"><i class="far fa-question-circle"></i>Lihat Pengguna</a></li>
+    <li><a href="../dashboard/about/"><i class="fas fa-sliders-h"></i>Tentang Admin</a>
+      <form action="" name="keluar">
+        <button class="keluar">keluar</button>
+
+      </form>
+  </li>
   </ul>
 </div>
  <section></section>
+ <script>
+  const tombol=document.keluar;
+  tombol.onclick = ()=>{
+    fetch("/api/keluar").then((response)=>{
+      if(response.ok){
+        location.href="/hal-utama"
+      }
+    })
+  }
+ </script>
 
   </body>
 </html>

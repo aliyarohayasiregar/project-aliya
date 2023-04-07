@@ -1,0 +1,194 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    font-family: 'Comfortaa', cursive;
+
+}
+
+.container {
+    margin-inline: auto;
+}
+
+.navigation {
+    width: 100%;
+    padding: 10px 0 10px 0;
+
+
+}
+
+header {
+    width: 279%;
+    height: 110vh;
+    background-image: url(../assets/pexels-shattha-pilabut-135620.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    place-content: center;
+
+
+}
+
+button {
+    background-color: antiquewhite;
+    border-radius: 5px;
+    height: 29px;
+    width: 95px;
+}
+
+button:hover {
+    background-color: brown;
+}
+
+.box a {
+    text-decoration: none;
+    color: black;
+}
+
+.navigation .box-navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation .box-navigation .box:nth-child(2) ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.navigation .box-navigation .box:nth-child(2) ul li {
+    list-style: none;
+    margin-left: 30px;
+}
+
+.navigation .box-navigation .box:nth-child(2) ul li a {
+    text-decoration: none;
+    color: rgb(39, 36, 36);
+    transition: all .3s ease;
+}
+
+.navigation .box-navigation .box:nth-child(1) h1 {
+    font-size: 40px;
+    color: rgb(39, 36, 36);
+
+}
+
+.navigation .box-navigation .box:nth-child(2) ul li a:hover {
+    color: aquamarine;
+}
+
+
+/* hero */
+p{
+    font-size: 30px;
+}
+header .hero {
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+}
+
+
+
+header .hero h1 {
+    color: white;
+    font-size: 54px;
+    text-align: center;
+}
+
+section .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    row-gap: 2rem;
+    padding: 20px;
+}
+
+.about {
+    background-color: #F1DEC9;
+
+}
+
+img {
+    width: 30%;
+    border-radius: 15px;
+}
+
+
+
+@media (max-width:1150px) {
+
+    .navigation .box-navigation {
+        padding: 28px;
+    }
+}
+
+@media (max-width:1050px) {
+    .about .box-about .box:nth-child(2) img {
+        width: 523px;
+        height: 342px;
+        margin-right: 15px
+    }
+}
+
+@media (max-width: 568px) {
+    header {
+        width: 125%;
+    }
+}
+
+@media (max-width: 403px) {
+    header {
+        width: 154%;
+        padding: 10px;
+    }
+
+    .about .box-about .box:nth-child(2) img {
+        width: 430px;
+        height: 315px;
+    }
+
+    p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 414px) {
+    header {
+        width: 190%;
+        height: 120vh;
+    }
+
+}
+
+@media (max-width: 749px) {
+    header {
+        width: 100%;
+        height: 80vh;
+        background-size: 94%;
+    }
+
+    .about .box-about .box:nth-child(2) img {
+        width: 430px;
+        height: 315px;
+    }
+
+    p {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 980px) {
+    .box p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

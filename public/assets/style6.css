@@ -310,15 +310,15 @@ a.tbl-biru:hover{
     flex-direction: column;
     padding: 36px;
     text-align: center;
-    width: 248px;
-    height: 374px;
-    border: solid#666;
+    width: 252px;
+    height: 388px;
+    border: solid#b8b4b4;
     border-radius: 30px;
-    background-color:#666;
+    background-color:#b8b4b4
 }
 
 .container img {
-    width: 170px;
+    width: 185px;
     height: 240px;
 }
 

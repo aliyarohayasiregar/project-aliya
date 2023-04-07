@@ -9,7 +9,8 @@ body{
     padding: 0px;
     font-family:'open Sans',sans-serif;
     overflow-x: hidden;
-    background-color: #D6E4E5;
+    background:url(./pexels-andrea-piacquadio-3755706.jpg);
+    background-size: cover;
 }
 .wrapper{
     width: 1100px;
@@ -48,7 +49,7 @@ nav{
     line-height: 80px;
     position: sticky;position: -webkit-sticky;
     top: 0;
-    background-color: #6D9886;
+    background-color: #C8B6A6;
     z-index: 1;
     border-bottom: 1 solid black;
 }
@@ -74,7 +75,7 @@ nav ul li a:hover{
 }
 
 a.tbl-biru{
-    background-color: #7FE9DE;
+    background-color: #867070;
     border-radius: 20px;
     margin-top: 20px;
     padding: 15px 20px 15px 20px;
@@ -88,7 +89,7 @@ a.tbl-biru:hover{
     text-decoration: none;
 }
 .tbl-biru{
-    background-color: #7FE9DE;
+    background-color: #867070;
     border-radius: 20px;
     margin-top: 20px;
     padding: 15px 20px 15px 20px;
@@ -105,15 +106,18 @@ a.tbl-biru:hover{
 table {
     border-collapse: collapse;
     margin: auto;
-    margin-bottom: 80px
+    margin-bottom: 80px;
+    padding-top: 20px;
+
 }
 
-tr,th{
-    padding: 15px;
+tr,th,td{
+    padding: 40px;
+    margin: 20px;
 }
 
 thead{
-    background-color: #7FE9DE;
+    background-color: #867070;
 }
 tbody{
     text-align: center;
@@ -127,70 +131,4 @@ tbody{
 }
 
 
-/* footer */
 
-.footer-container p,
-.footer-container a {
-    opacity: 0.8;
-}
-
-.footer a {
-    display: block;
-    color: rgb(14, 13, 13);
-    text-decoration: none;
-}
-
-.social-icons {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    padding: 25px;
-    text-align: center;
-}
-
-.social-icons li {
-    border-radius: 50%;
-    height:40px;
-    width: 40px;
-    margin: 10px;
-    transition: var(transition);
-    cursor: pointer;
-}
-
-.social-icons li:hover {
-    color: #8D72E1;
-    background:white;
-}
-
-
-footer {
-    background-color: #DEF5E5;
-    margin: -60px;
-    padding: 0px;
-}
-
-
-.footer-text {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(4, 1fr);
-    text-align:center;
-    align-items: baseline;
-    font-size: 15px;
-    padding: 30px;margin: -45px;
-}
-.footer-text a:hover {
-    color:#8D72E1;
-}
-
-
-.footer-text h2{
-    font-size: 25px;
-}
-
-@media screen and (max-width:991.98px){
-    footer{
-       margin: 0px;
-    }
-    
-}

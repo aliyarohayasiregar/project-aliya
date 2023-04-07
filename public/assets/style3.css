@@ -9,11 +9,14 @@ input {
   
 }
 form{
-    background-color: #C9EEFF;
+    background:url(./pexels-khairul-nizam-16516.jpg);
+    background-size: cover;
 }
 body{
     padding: 100px;
     padding-top: 0px;
+    background: url(./pexels-pixabay-533669.jpg);
+    background-size: cover;
 }
 .input_user, textarea {
     border-radius: 10px;
@@ -53,12 +56,12 @@ textarea {
 }
 
 #reset_button {
-    background-color: #0E8388;
+    background-color: #1b1c1c;
     margin-right: 20px;
 }
 
 #submit_button {
-    background-color: #FFACAC   ;
+    background-color: #1b1c1c   ;
 }
 
 #reset_button:hover {

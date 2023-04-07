@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data users</title>
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../assets/style4.css">
+  </head>
+  <body>
+    <nav>
+      <div class="wrapper">
+          <div class="logo"><a href="">Data Users</a></div>
+          <div class="menu">
+              <ul >
+                  <li><a class="tbl-biru" href="http://localhost:3000/hal-admin/">Kembali</a></li>
+              </ul>
+          </div>
+      </div>
+  </nav>
+    <table border="2">
+      <thead>
+        <tr>
+          <th>Nama </th>
+          <th>Username</th>
+          <th>Alamat</th>
+          <th>No Telepon</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      fetch("/api/users", {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            const tr = document.createElement("tr");
+
+            const tdNim = document.createElement("td");
+            tdNim.textContent = data[i].nama;
+            tr.appendChild(tdNim);
+
+            const id=document.createElement("td");
+            id.textContent=data[i].username;
+            tr.appendChild(id);
+
+            const tdName = document.createElement("td");
+            tdName.textContent =data[i].alamat;
+            tr.appendChild(tdName);
+
+            const des=document.createElement("td");
+            des.textContent=data[i].no_telepon;
+            tr.appendChild(des);
+
+
+            document.querySelector("tbody").appendChild(tr);
+          }
+        });
+    </script>
+  
+  </body>
+            
+</html>

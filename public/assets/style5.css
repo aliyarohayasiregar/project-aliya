@@ -8,6 +8,17 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+.keluar{
+  background-color: whitesmoke;
+  border-radius: 20px;
+  margin-top: 20px;
+  padding: 15px 20px 15px 20px;
+  color: rgb(12, 11, 11);
+  font-weight: bold;
+  position: absolute;
+  margin: 75px;
+}
+
 .sidebar {
   position: fixed;
   left: 0px;
@@ -16,6 +27,7 @@ body {
   background: #042331;
   transition: all .5s ease;
 }
+
 .sidebar header {
   font-size: 22px;
   color: white;

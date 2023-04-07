@@ -22,6 +22,10 @@
               <a href="../sepatu/">Sepatu</a>  
         
     </nav>
+    <form action="" name="keluar">
+      <button>keluar</button>
+    </form>
+
 
     <div class="icons">
       <div class="fas fa-bars" id="menu-btn"></div>
@@ -36,8 +40,8 @@
 </main>
 
 
-
-    <script src="../../script.js"></script>
+<script src="../keluar.js"></script>
+<script src="../../script.js"></script>
 </body>
 </html>
   <script>
@@ -67,6 +71,13 @@
           judul.textContent = products[tamp].nama_barang;
           barang.appendChild(judul);
           tampungan.appendChild(barang);
+
+          const des = document.createElement("h4");
+          judul.className = "judul-produk";
+          des.textContent = products[tamp].descripsite;
+          barang.appendChild(des);
+          tampungan.appendChild(barang);
+
 
           const harga = document.createElement("h3");
           harga.className = "price";

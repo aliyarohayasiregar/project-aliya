@@ -54,14 +54,14 @@ app.use((req, res, next) => {
 });
 
 
-// Untuk mengakses file statis
-app.use(express.static("public"));
+// Untuk mengakses file statis(khusus Vercel)
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use(express.static(path.join(__dirname, "public")));
 const upload = multer({ dest: "public/photos" });
 
-// Untuk mengakses file statis (khusus Vercel)
-// import path from "path";
-// const __dirname = path.dirname(new URL(import.meta.url).pathname);
-// app.use(express.static(path.resolve(__dirname, "public")));
 
 // Untuk membaca body berformat JSON
 app.use(express.json());
@@ -89,36 +89,21 @@ app.post("/api/login", async (req, res) => {
 });
 
 
-// Dapatkan pengguna saat ini (yang sedang login)
-app.get("/api/me", (req, res) => {
-  const me = jwt.verify(req.cookies.token, process.env.SECRET_KEY);
-  res.json(me);
-});
 
-// Login (dapatkan token)
 
 // Logout (hapus token)
-app.get("/api/logout", (_req, res) => {
+app.get("/api/keluar", (_req, res) => {
   res.setHeader("Cache-Control", "no-store"); // khusus Vercel
   res.clearCookie("token");
   res.send("Logout berhasil.");
 });
 
-// ROUTE MAHASISWA
-
-// Dapatkan semua
-app.get("/api/detail", async (_req, res) => {
-  const results = await client.query("SELECT * FROM detail_barang");
+// dapatkan user
+app.get("/api/users", async (_req,res)=>{
+  const results = await client.query("SELECT * FROM daftar");
   res.json(results.rows);
 });
 
-// Dapatkan satu
-app.get("/api/mahasiswa/:id", async (req, res) => {
-  const results = await client.query(
-    `SELECT * FROM mahasiswa WHERE id = ${req.params.id}`
-  );
-  res.json(results.rows[0]);
-});
 
 // Tambah pengguna
 app.post("/api/daftar", async (req, res) => {
@@ -130,6 +115,10 @@ app.post("/api/daftar", async (req, res) => {
   );
   res.send("akun berhasil daftar.");
 });
+
+const salt = await bcrypt.genSalt(10);
+const hash = await bcrypt.hash("123", salt);
+console.log(hash);
 
 //login admin
 app.post("/api/login/admin", async (req, res) => {
@@ -150,18 +139,6 @@ app.post("/api/login/admin", async (req, res) => {
     res.send("Pengguna tidak ditemukan.");
   }
 });
-
-
-// //tambah admin
-// app.post("/api/admin", async (req, res) => {
-//   const salt = await bcrypt.genSalt();
-//   const hash = await bcrypt.hash(req.body.password, salt);
-//   await client.query(
-//     `INSERT INTO admin(username,password) VALUES ('${req.body.username}','${hash}')`
-//   );
-//   res.send("akun berhasil daftar.");
-// });
-
 
 // ROUTE PELATIHAN
 
@@ -202,7 +179,7 @@ app.get("/api/kategori3",async(_req,res)=>{
 })
 app.get("/api/kategori4",async(_req,res)=>{
   const results = await client.query(
-    `SELECT *FROM barang WHERE id_kategori = 4`
+    `SELECT *FROM barang WHERE id_kategori =4`
   );
   res.json(results.rows);
 
